@@ -1,0 +1,58 @@
+#include <iostream>
+#include<string>
+#include<iomanip>
+#include <cstdlib>
+using namespace std;
+int RandomNumber(int From, int To)
+{
+    int randNum = rand() % (To - From + 1) + From;
+    return randNum;
+}
+void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols) {
+
+    for (int i = 0; i < Rows; i++)
+    {
+        for (int j = 0; j < Cols; j++)
+        {
+            arr[i][j] = RandomNumber(1, 10);
+        }
+    }
+}
+void PrintMatrix(int arr[3][3], short Rows, short Cols) {
+    for (int i = 0; i < Rows; i++)
+    {
+        for (int j = 0; j < Cols; j++)
+        {
+            printf(" %0*d   ", 2, arr[i][j]);
+            //cout << setw(3) << arr[i][j] << "     ";
+        }
+        cout << endl;
+    }
+}
+bool AreEqualMatrices(int arr1[3][3], int arr2[3][3],short Rows,short Cols) {
+    for (int i = 0; i < Rows; i++)
+    {
+        for (int j = 0; j < Cols; j++)
+        {
+            if (arr1[i][j] != arr2[i][j])
+                return false;
+        }
+    }
+    return true;
+}
+int main()
+{
+    srand((unsigned)time(NULL));
+    int arr1[3][3],arr2[3][3];
+    FillMatrixWithRandomNumbers(arr1,3,3);
+    FillMatrixWithRandomNumbers(arr2, 3, 3);
+    cout << "\n The following is a 3x3 ordered matrix:\n";
+    PrintMatrix(arr1, 3, 3);
+    cout << "\n The following is a 3x3 ordered matrix:\n";
+    PrintMatrix(arr2, 3, 3);
+    if(AreEqualMatrices(arr1,arr2,3,3)) //if element in array 1 equals to element in array 2 it will return true otherwise it will return false
+        cout << "\nYES: both martices are typical.";
+    else
+        cout << "\nNo: martices are NOT typical.";
+    return 0;
+}
