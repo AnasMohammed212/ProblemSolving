@@ -1,0 +1,66 @@
+#include <iostream>
+#include<string>
+#include<iomanip>
+#include <cstdlib>
+using namespace std;
+int RandomNumber(int From, int To)
+{
+    int randNum = rand() % (To - From + 1) + From;
+    return randNum;
+}
+void FillMatrixWithRandomNumbers(int arr[3][3], short Rows, short Cols) {
+
+    for (int i = 0; i < Rows; i++)
+    {
+        for (int j = 0; j < Cols; j++)
+        {
+            arr[i][j] = RandomNumber(1, 10);
+        }
+    }
+}
+void PrintMatrix(int arr[3][3], short Rows, short Cols) {
+    for (int i = 0; i < Rows; i++)
+    {
+        for (int j = 0; j < Cols; j++)
+        {
+            printf(" %0*d   ", 2, arr[i][j]);
+            //cout << setw(3) << arr[i][j] << "     ";
+        }
+        cout << endl;
+    }
+}
+int SumOfMatrix(int arr[3][3], short Rows, short Cols) {
+    int Sum = 0;
+    for (int i = 0; i < Rows; i++)
+    {
+        for (int j = 0; j < Cols; j++)
+        {
+            Sum += arr[i][j];
+       
+        }
+    }
+    return Sum;
+}
+bool AreEqualMatrices(int arr1[3][3], int arr2[3][3]) {
+    if (SumOfMatrix(arr1, 3, 3) == SumOfMatrix(arr2, 3, 3))
+        return true;
+    else return false;
+}
+int main()
+{
+    srand((unsigned)time(NULL));
+    int arr1[3][3],arr2[3][3];
+    FillMatrixWithRandomNumbers(arr1,3,3);
+    FillMatrixWithRandomNumbers(arr2, 3, 3);
+    cout << "\n The following is a 3x3 ordered matrix:\n";
+    PrintMatrix(arr1, 3, 3);
+    cout << "\n The following is a 3x3 ordered matrix:\n";
+    PrintMatrix(arr2, 3, 3);
+    cout << "Sum Of Matrix 1 is : " << SumOfMatrix(arr1, 3, 3) << endl;;
+    cout << "Sum Of Matrix 2 is : " << SumOfMatrix(arr2, 3, 3) << endl;;
+    if (AreEqualMatrices(arr1, arr2))
+        cout << " They are equal matrices " << endl;
+    else
+        cout << " They are not equal matrices " << endl;
+    return 0;
+}
