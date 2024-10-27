@@ -1,0 +1,48 @@
+#include <iostream>
+#include<string>
+#include<iomanip>
+#include <cstdlib>
+using namespace std;
+int ReadNumber(string Message)
+{
+    int Number;
+    cin >> Number;
+    return Number;
+}
+void PrintMatrix(int arr[3][3], short Rows, short Cols) {
+    for (int i = 0; i < Rows; i++)
+    {
+        for (int j = 0; j < Cols; j++)
+        {
+            printf(" %0*d   ", 2, arr[i][j]);
+            //cout << setw(3) << arr[i][j] << "     ";
+        }
+        cout << endl;
+    }
+}
+short CountNumberInMatrix(int arr[3][3], short Rows, short Cols, int Number) {
+    short Counter = 0;
+    for (int i = 0; i < Rows; i++)
+    {
+        for (int j = 0; j < Cols; j++)
+        {
+            if (arr[i][j] == Number)
+                Counter++;
+        }
+    }
+    return Counter;
+}
+bool IsSparseMatrix(int arr[3][3], short Rows, short Cols) {
+    short MatrixSize = Rows * Cols;
+    return(CountNumberInMatrix(arr, 3, 3, 0) >= ceil((float)MatrixSize / 2));
+}
+int main()
+{
+    int arr[3][3] = { {3,0,1},{9,6,0},{0,0,9} };
+    PrintMatrix(arr, 3, 3);
+    if(IsSparseMatrix(arr,3,3))
+        cout << "\nYes: It is Sparse\n";
+    else
+        cout << "\nNo: It is Not Sparse\n";
+    return 0;
+}
