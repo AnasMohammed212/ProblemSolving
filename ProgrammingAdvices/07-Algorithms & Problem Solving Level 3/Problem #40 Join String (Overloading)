@@ -1,0 +1,29 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+string JoinString(vector<string> vString, string Delimiter) {
+	string S1 = "";
+	for (string& s : vString) {
+		S1 = S1 + s + Delimiter;
+	}
+	return S1.substr(0, S1.length() - Delimiter.length());
+}
+string JoinString(string arr[], short length, string Delimiter) {
+	string S1 = "";
+	for (int i = 0; i < length; i++) {
+		S1 = S1 +arr[i]+ Delimiter;
+	}
+	return S1.substr(0, S1.length() - Delimiter.length());
+}
+int main()
+{
+	vector<string> vString = { "Mohammed","Fadi","Ali","Maher" };
+	string arr[]= { "Mohammed","Fadi","Ali","Maher" };
+
+	cout << "\nVector after join: \n";
+	cout << JoinString(vString, " ");
+	cout << "\n\nArray after join: \n";
+	cout << JoinString(arr,4," ");
+	return 0;
+}
