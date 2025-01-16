@@ -1,0 +1,43 @@
+#include <iostream>
+#include "MyLibrary.h"
+using namespace std;
+using namespace MyLibrary;
+sDate CalculateVacationReturnDate(sDate DateFrom, short VacationDays) {
+    short WeekEndCounter = 0;
+    while (IsWeekEnd(DateFrom))
+        DateFrom = IncreasedDateByOneDay(DateFrom);
+
+
+    for (int i = 1; i <= VacationDays + WeekEndCounter; i++) {
+        if (IsWeekEnd(DateFrom))
+            WeekEndCounter++;
+        DateFrom = IncreasedDateByOneDay(DateFrom);
+    }
+
+    while(IsWeekEnd(DateFrom))
+        DateFrom = IncreasedDateByOneDay(DateFrom);
+
+    return DateFrom;
+
+
+}
+short ReadVacationDays()
+{
+    short Days;
+    cout << "\nPlease enter vacation days? ";
+    cin >> Days;
+    return Days;
+}
+int main()
+{
+    cout << "\nVacation Starts: ";
+    sDate DateFrom = ReadFullDate();
+
+    short VacationDays = ReadVacationDays();
+    sDate ReturnDate = CalculateVacationReturnDate(DateFrom, VacationDays);
+
+    cout << "\n\nReturn Date: " << DayShortName(DayOfWeekOrder(ReturnDate)) << " , "
+        << ReturnDate.Day << "/" << ReturnDate.Month << "/" << ReturnDate.Year << endl;
+    system("pause>0");
+    return 0;
+}
