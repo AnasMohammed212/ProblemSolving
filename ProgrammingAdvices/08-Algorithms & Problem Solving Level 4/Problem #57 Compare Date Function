@@ -1,0 +1,24 @@
+#include <iostream>
+#include "MyLibrary.h"
+using namespace std;
+using namespace MyLibrary;
+enum enDateCompare{Before = -1, Equal = 0, After = 1};
+enDateCompare CompareDates(sDate Date1, sDate Date2) {
+    if (IsDate1BeforeDate2(Date1, Date2))
+        return enDateCompare::Before;
+    else if (IsDate1EqualDate2(Date1, Date2))
+        return enDateCompare::Equal;
+    else
+        return enDateCompare::After;
+}
+int main()
+{
+    cout << "\nEnter Date1:";
+    sDate Date1 = ReadFullDate();
+
+    cout << "\nEnter Date2:";
+    sDate Date2 = ReadFullDate();
+
+    cout << "\nCompare Result = " << CompareDates(Date1, Date2);
+    return 0;
+}
