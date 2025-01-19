@@ -1,0 +1,16 @@
+#include <iostream>
+#include "MyLibrary.h"
+using namespace std;
+using namespace MyLibrary;
+int PeriodLengthInDays(sPeriod Period, bool IncludeEndDate = false) {
+    return GetDifferenceInDays(Period.StartDate, Period.EndDate, IncludeEndDate);
+}
+int main()
+{
+    cout << "\nEnter Period 1:";
+    sPeriod Period1 = ReadPeriod();
+    cout << "\nPeriod Length is: " << PeriodLengthInDays(Period1);
+    cout << "\nPeriod Length (Including End Date) is: " << PeriodLengthInDays(Period1, true);
+    system("pause>0");
+    return 0;
+}
