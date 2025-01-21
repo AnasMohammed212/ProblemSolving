@@ -1,0 +1,36 @@
+#include <iostream>
+#include "MyLibrary.h"
+using namespace std;
+using namespace MyLibrary;
+int CountOverLapDays(sPeriod Period1, sPeriod Period2) {
+    int Period1Length = PeriodLengthInDays(Period1, true);
+    int Period2Length = PeriodLengthInDays(Period2, true);
+    int OverLapDays = 0;
+    if (!IsOverLapPeriods(Period1, Period2))
+        return 0;
+    if (Period1Length < Period2Length) {
+        while (IsDate1BeforeDate2(Period1.StartDate, Period1.EndDate)) {
+            if (isDateInPeriod(Period1.StartDate, Period2))
+                OverLapDays++;
+            Period1.StartDate = IncreasedDateByOneDay(Period1.StartDate);
+        }
+    }
+    else {
+        while (IsDate1BeforeDate2(Period2.StartDate, Period2.EndDate)) {
+            if (isDateInPeriod(Period2.StartDate, Period1))
+                OverLapDays++;
+            Period2.StartDate = IncreasedDateByOneDay(Period2.StartDate);
+        }
+    }
+    return OverLapDays;
+}
+int main()
+{
+    cout << "\nEnter Period 1 :";
+    sPeriod Period1 = ReadPeriod();
+    cout << "\nEnter Period 2 :";
+    sPeriod Period2 = ReadPeriod();
+    cout << "\nOverlap Days Count Is: " << CountOverLapDays(Period1, Period2);
+    system("pause>0");
+    return 0;
+}
