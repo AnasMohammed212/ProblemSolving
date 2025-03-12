@@ -1,0 +1,41 @@
+using System;
+using System.Data;
+using System.IO;
+using System.Linq;
+public class Logger
+{
+    public delegate void LogAction(string message);
+    private LogAction _LogAction;
+    public Logger(LogAction action)
+    {
+        _LogAction = action;
+    }
+    public void Log(string message)
+    {
+        _LogAction(message);
+    }
+}
+public class Program
+{
+    public static void LogToScreen(string message)
+    {
+        Console.WriteLine(message);
+    }
+    public static void LogToFile(string message)
+    {
+        string fileName = "log.txt";
+        using (StreamWriter writer = new StreamWriter(fileName, true))
+        {
+            writer.WriteLine(message);
+        }
+    }
+
+    public static void Main()
+    {
+        Logger ScreenLogger = new Logger(LogToScreen);
+        Logger FileLogger=new Logger(LogToFile);
+        ScreenLogger.Log("Screen Message");
+        FileLogger.Log("File Message");
+        Console.ReadLine();
+    }
+}
