@@ -1,0 +1,33 @@
+using Microsoft.Win32;
+using System;
+using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
+
+class Program
+{
+    static string ComputeHash(string input)
+    {
+        
+         
+        using (SHA256 sha256 = SHA256.Create())
+        {
+             
+            byte[] hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+
+             
+            return BitConverter.ToString(hashBytes).Replace(-, ).ToLower();
+        }
+    }
+    static void Main()
+    {
+        string Data = Anas;
+        string result=ComputeHash(Data);
+        Console.WriteLine(Data);
+        Console.WriteLine(result);
+
+        Console.ReadKey();
+
+    }
+}
