@@ -1,0 +1,13 @@
+Declare @DepartmentID int
+Declare @TotalEmployees int
+Declare @StartDate Date
+Declare @EndDate Date
+Declare @DepartmentName varchar(50)
+Set @DepartmentID=3;
+set @StartDate='2023-01-01';
+set @EndDate='2023-12-31';
+select @DepartmentName=Name From Departments Where DepartmentID=@DepartmentID
+Select @TotalEmployees=Count(*) from Employees where DepartmentID=@DepartmentID And HireDate Between @StartDate And @EndDate
+PRINT 'Department Name: '+ @DepartmentName;
+PRINT 'Reporting Period '+Cast(@StartDate as Varchar) + 'To '+Cast(@EndDate as Varchar);
+PRINT 'Total Employees Hired in Year '+Cast(@StartDate as Varchar)+' : '+Cast(@TotalEmployees as Varchar);
