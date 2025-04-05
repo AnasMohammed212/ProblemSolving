@@ -1,0 +1,31 @@
+use C21_DB1;
+
+CREATE TABLE Sales (
+    SaleID INT PRIMARY KEY,
+    SaleDate DATE,
+    SaleAmount DECIMAL(10, 2)
+);
+
+INSERT INTO Sales (SaleID, SaleDate, SaleAmount) VALUES (1, '2023-06-01', 150.00);
+INSERT INTO Sales (SaleID, SaleDate, SaleAmount) VALUES (2, '2023-06-03', 200.00);
+INSERT INTO Sales (SaleID, SaleDate, SaleAmount) VALUES (3, '2023-06-05', 50.00);
+INSERT INTO Sales (SaleID, SaleDate, SaleAmount) VALUES (4, '2023-07-10', 300.00);
+INSERT INTO Sales (SaleID, SaleDate, SaleAmount) VALUES (5, '2023-07-11', 250.00);
+
+Declare @Year INT;
+Declare @Month INT;
+Declare @TotalSales Decimal(10,2);
+Declare @TotalTransactions INT;
+Declare @AverageSale Decimal(10,2);
+
+SET @Year=2023;
+SET @Month=6;
+Select @TotalSales=Sum(SaleAmount) From Sales Where Year(SaleDate)=@Year and MONTH(SaleDate)=@Month;
+Select @TotalTransactions=Count(*) From Sales Where Year(SaleDate)=@Year and MONTH(SaleDate)=@Month;
+Set @AverageSale=@TotalSales/@TotalTransactions;
+
+PRINT 'Monthly Sales Summary Report';
+PRINT 'Year: ' + CAST(@Year AS VARCHAR) + ', Month: ' + CAST(@Month AS VARCHAR);
+PRINT 'Total Sales: ' + CAST(@TotalSales AS VARCHAR);
+PRINT 'Total Transactions: ' + CAST(@TotalTransactions AS VARCHAR);
+PRINT 'Average Sale Value: ' + CAST(@AverageSale AS VARCHAR);
