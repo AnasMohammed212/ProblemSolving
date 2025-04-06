@@ -1,0 +1,18 @@
+DECLARE @CustomerID INT;
+DECLARE @TotalSpent DECIMAL(10, 2);
+DECLARE @PointsEarned INT;
+DECLARE @CurrentYear INT = YEAR(GETDATE());
+
+Set @CustomerID=1;
+
+Select @TotalSpent=Sum(Amount) From Purchases Where CustomerID=@CustomerID and Year(PurchaseDate)=@CurrentYear;
+
+Set @PointsEarned=Cast(@TotalSpent/10 as INT);
+
+Update Customers
+SET LoyaltyPoints=LoyaltyPoints+@PointsEarned
+Where CustomerID=@CustomerID;
+
+PRINT 'Loyalty Points Update for Customer ID: ' + CAST(@CustomerID AS VARCHAR);
+PRINT 'Total Amount Spent in ' + CAST(@CurrentYear AS VARCHAR) + ': $' + CAST(@TotalSpent AS VARCHAR);
+PRINT 'Loyalty Points Earned: ' + CAST(@PointsEarned AS VARCHAR);
