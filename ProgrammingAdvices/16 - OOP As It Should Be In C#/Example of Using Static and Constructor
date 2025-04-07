@@ -1,0 +1,67 @@
+using System;
+using System.ComponentModel;
+using System.Runtime.Remoting.Messaging;
+
+
+    class clsPerson
+    {
+        public string Firstname { get; set; }
+        public short Age { get; set; }
+        public char Gender { get; set; }
+
+        public clsPerson(string Firstname, short Age, char Gender)
+        {
+            this.Firstname = Firstname;
+            this.Age = Age;
+            this.Gender = Gender;
+        }
+
+        public static clsPerson Find(short ID)
+        {
+            return (ID == 100) ? new clsPerson("Anas", 20, 'M') : null;
+        }
+
+        public static clsPerson Find(string Username, string Password)
+        {
+            return (Username == "User1" && Password == "1234") ? new clsPerson("Anas", 20, 'M') : null;
+        }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+            clsPerson Person = clsPerson.Find(100);
+
+            if (Person != null)
+            {
+                Console.WriteLine("Firstname: {0}", Person.Firstname);
+                Console.WriteLine("Age: {0}", Person.Age);
+                Console.WriteLine("Gender: {0}\n", Person.Gender);
+            }
+            else
+            {
+                Console.WriteLine("Person is not found :-(");
+            }
+
+
+            //clsPerson Person2 = clsPerson.Find("User1", "1234");
+
+
+            if (Person2 != null)
+            {
+                Console.WriteLine("Firstname: {0}", Person2.Firstname);
+                Console.WriteLine("Age: {0}", Person2.Age);
+                Console.WriteLine("Gender: {0}", Person2.Gender);
+            }
+            else
+            {
+                Console.WriteLine("Person is not found :-(");
+            }
+
+
+            Console.ReadLine();
+
+        }
+    }
