@@ -1,7 +1,0 @@
-SELECT *, 
-    CASE 
-        WHEN SaleAmount > 150 THEN 1 
-        ELSE 2 
-    END AS SaleLevel 
-FROM Sales 
-ORDER BY SaleLevel,SaleAmount;
