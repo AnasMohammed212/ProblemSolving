@@ -1,0 +1,12 @@
+Declare @EmployeeID INT;
+Declare @MAXID INT;
+Declare @Name varchar(50);
+
+Select @EmployeeID=Min(EmployeeID) from Employees
+Select @MAXID=Max(EmployeeID) from Employees
+while @EmployeeID is not Null and @EmployeeID<=@MAXID
+begin
+Select @Name=Name From Employees where EmployeeID=@EmployeeID
+Print @Name
+Select @EmployeeID=Min(EmployeeID) from Employees where EmployeeID>@EmployeeID
+end
