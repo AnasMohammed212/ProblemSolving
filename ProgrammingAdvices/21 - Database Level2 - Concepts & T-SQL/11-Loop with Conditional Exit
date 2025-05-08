@@ -1,0 +1,12 @@
+Declare @Balance Decimal(10,2)=950.00;
+Declare @Withdrawl Decimal(10,2)=100.00;
+while @Balance>0
+Begin
+Set @Balance=@Balance-@Withdrawl;
+if @Balance<0
+Begin
+Print 'Insufficient Funds For Withdrawl';
+Break;
+End
+Print 'New Balance: '+Cast(@Balance as Varchar);
+End
