@@ -1,0 +1,6 @@
+Create Function dbo.GetStudentsBySubject(@Subject nvarchar(50))
+returns table
+as
+Return(
+Select * from Students where Subject=@Subject
+)
