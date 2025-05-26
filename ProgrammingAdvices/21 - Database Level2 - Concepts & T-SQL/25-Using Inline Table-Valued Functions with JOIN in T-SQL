@@ -1,0 +1,22 @@
+CREATE FUNCTION dbo.GetStudentsBySubject
+(
+    @Subject NVARCHAR(50)
+)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT *
+    FROM Students
+    WHERE Subject = @Subject
+);
+
+
+
+
+select s.StudentID,s.Name,s.Subject,t.Name
+from
+dbo.GetStudentsBySubject('Math') s
+join
+Teachers t 
+on s.Subject=t.Subject
