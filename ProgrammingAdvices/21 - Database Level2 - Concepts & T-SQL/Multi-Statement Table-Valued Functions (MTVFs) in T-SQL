@@ -1,0 +1,14 @@
+Create Function dbo.GetTopPerformingStudents()
+returns @Result Table(
+StudentID INT,
+Name NVarchar(50),
+Subject NVarchar(50),
+Grade INT
+)
+as 
+begin
+Insert Into @Result(StudentID,Name,Subject,Grade)
+select Top 3 StudentID,Name,Subject,Grade From Students
+Order By Grade Desc
+return
+end
