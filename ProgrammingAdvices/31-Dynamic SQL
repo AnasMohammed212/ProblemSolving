@@ -1,8 +1,0 @@
-CREATE PROCEDURE GenerateDynamicSQL1
-    @TableName NVARCHAR(128)
-AS
-BEGIN
-    DECLARE @SQL NVARCHAR(MAX);
-    SET @SQL = 'SELECT * FROM ' + @TableName;
-    EXECUTE(@SQL);
-END
